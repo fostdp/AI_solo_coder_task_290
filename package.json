@@ -1,0 +1,18 @@
+{
+  "name": "airport-runway-simulator",
+  "version": "1.0.0",
+  "description": "机场跑道调度模拟游戏",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.5",
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
+    "ws": "^8.20.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

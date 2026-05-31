@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机场跑道调度模拟 - 专业版</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✈️ 机场跑道调度模拟</h1>
+            <div class="player-info">
+                <span id="roleLabel">选择角色:</span>
+                <button id="roleApproach" class="btn-role">进近管制</button>
+                <button id="roleTower" class="btn-role">塔台管制</button>
+            </div>
+            <div class="connection-status">
+                <span id="connStatus">🔴 未连接</span>
+            </div>
+            <div class="weather-display" id="weatherDisplay">
+                <span id="weatherIcon">☀️</span>
+                <span id="weatherText">晴朗</span>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <span class="label">得分</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">延误</span>
+                    <span class="value" id="delay">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">已处理</span>
+                    <span class="value" id="handled">0</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="game-controls">
+            <button id="startBtn" class="btn btn-primary">开始游戏</button>
+            <button id="pauseBtn" class="btn btn-secondary" disabled>暂停</button>
+            <button id="recordsBtn" class="btn btn-info">查看记录</button>
+        </div>
+
+        <div class="game-container">
+            <div class="airport" id="airport">
+                <div class="runway" id="runway1">
+                    <div class="runway-label">跑道 1</div>
+                    <div class="runway-status" id="runway1Status"></div>
+                </div>
+                <div class="runway" id="runway2">
+                    <div class="runway-label">跑道 2</div>
+                    <div class="runway-status" id="runway2Status"></div>
+                </div>
+                <div class="taxiway" id="taxiway1">
+                    <div class="taxiway-label">滑行道 A</div>
+                </div>
+                <div class="vehicle-area" id="vehicleArea">
+                    <div class="vehicle-label">地面保障区</div>
+                </div>
+            </div>
+
+            <div class="control-panel">
+                <h3>📋 等待队列</h3>
+                <div class="queue" id="departureQueue">
+                    <h4>起飞等待 (进近管制)</h4>
+                    <div id="departureList"></div>
+                </div>
+                <div class="queue" id="arrivalQueue">
+                    <h4>降落等待 (塔台管制)</h4>
+                    <div id="arrivalList"></div>
+                </div>
+                
+                <h3>🚗 地面车辆</h3>
+                <div class="vehicle-list" id="vehicleList"></div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>📖 游戏说明</h3>
+            <ul>
+                <li><strong>双人合作:</strong> 进近管制管理起飞，塔台管制管理降落</li>
+                <li>点击飞机将其分配到空闲的跑道或滑行道</li>
+                <li><strong>除冰车:</strong> 雨雪天气必须先除冰才能起飞</li>
+                <li><strong>恶劣天气:</strong> 可能导致跑道临时关闭</li>
+                <li>地面车辆处理完后返回保障区</li>
+                <li>延误越少得分越高！</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="recordsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🏆 游戏记录</h2>
+            <div id="recordsList"></div>
+        </div>
+    </div>
+
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h2>🎮 游戏结束</h2>
+            <p>最终得分: <span id="finalScore">0</span></p>
+            <p>处理飞机: <span id="finalHandled">0</span> 架</p>
+            <p>延误次数: <span id="finalDelay">0</span> 次</p>
+            <button id="saveRecordBtn" class="btn btn-primary">保存记录</button>
+            <button id="restartBtn" class="btn btn-secondary">重新开始</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
